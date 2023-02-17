@@ -26,7 +26,9 @@ var timezone = moment.tz.guess();
 
 if(args.z){
     timezone = args.z
-} 
+} else {
+    timezone = moment.tz.guess();
+}
 
 //settiing longitude and latitude
 var latitude = args.n || (args.s * -1);
@@ -55,10 +57,26 @@ if (args.d == null) {
 
 
 if (days == 0) {
-    console.log( data.daily.precipitation_hours[0] + " " +  "today.");
-  } else if (days > 1) {
-      console.log( data.daily.precipitation_hours[days] + " " + "in " + days + " days.");
-  } else {
-      console.log( data.daily.precipitation_hours[1] + " " +  "tomorrow.");
-  }
+	console.log("today.");
+	if(data.daily.precipitation_hours[0] > 0) {
+	 	console.log("You might need your galoshes");	
+	}  else{
+	console.log("You will not need your galoshes");
+	}
+}
+else if (days > 1) {
+	console.log("in " + days + " days.");
+	if( data.daily.precipitation_hours[days] > 0) {
+		console.log("You might need your galoshes");
+	} else{
+	console.log("You will not need your galoshes")
+	} 	
+} else { 
+	console.log("tomorrow.");
+	if(data.daily.precipitation_hours[1] > 0) {
+		console.log("You might need your galoshes");
+	} else{
+		console.log("You will not need your galoshes");
+	}
+}
 
